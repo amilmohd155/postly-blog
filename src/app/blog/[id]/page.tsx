@@ -1,21 +1,26 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MdArrowBack, MdBackHand } from "react-icons/md";
+import { Blogs } from "@/data/blogs";
 
-export default function Blog() {
+export default function Blog({ params }: { params: { id: string } }) {
+  const blog = Blogs.find(({ id }) => id === params.id);
+
+  if (!blog) {
+    return null;
+  }
+
   return (
     <div>
       <Image
-        src="/image2.png"
+        src={blog?.image}
         alt="image"
         width={400}
         height={400}
-        className="w-full md:h-52 md:object-cover md:rounded-lg"
+        className="w-full h-60 md:max-h-52 md:object-cover md:rounded-lg"
       />
       <article className="p-5">
-        <h1 className="text-3xl">
-          {"How Apple's M1 Chip makes macOS development much less costly"}
-        </h1>
+        <h1 className="text-3xl">{blog.title}</h1>
         <div className="flex justify-between text-sm mt-5 border-b py-5 border-black dark:border-white">
           <p className="">
             Written by{" "}

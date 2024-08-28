@@ -18,23 +18,23 @@ export default function Header() {
     <nav aria-label="Main Navigation">
       {/* Mobile Navigation */}
       {pathName === "/" ? (
-        <div className="flex flex-row gap-5 items-center px-4 py-5 justify-between">
+        <div className="flex flex-row gap-5 items-center px-4 py-5 justify-between md:hidden">
           <button
             type="button"
             aria-expanded={open}
             aria-label="Open menu"
-            className="md:hidden text-2xl "
+            className="text-2xl "
             onClick={() => setOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
             <MdMenu />
           </button>
-          <div className="md:hidden items-center flex gap-2">
+          <div className="items-center flex gap-2">
             <span className="text-2xl font-semibold bg-gradient-to-tl from-blue-600 via-rose-400 to-indigo-400 inline-block text-transparent bg-clip-text">
               {appName}
             </span>
           </div>
-          <ThemeSwitch className="md:hidden text-2xl" />
+          <ThemeSwitch className="text-2xl" />
           <div
             className={clsx(
               "fixed bottom-0 left-0 right-0 top-0 px-4 py-5 z-50 flex flex-col bg-secodary-light dark:bg-secodary-dark text-white dark:text-slate-950 transition-transform duration-300 ease-in-out md:hidden",
@@ -83,7 +83,7 @@ export default function Header() {
         </div>
       ) : (
         <button
-          className="absolute left-0 top-0 m-5 p-2 text-2xl lg:hidden rounded-full bg-black text-white "
+          className="absolute left-0 top-0 m-5 p-2 text-2xl md:hidden rounded-full bg-black text-white "
           onClick={() => router.back()}
         >
           <MdArrowBack />
