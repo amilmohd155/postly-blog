@@ -17,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={clsx(inter.className, "md:py-12 p-5")}>{children}</body>
+      <body className={clsx(inter.className, "antialiased")}>
+        <div className="max-w-3xl mx-auto md:py-12 xl:max-w-5xl xl:px-0 min-h-screen">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
