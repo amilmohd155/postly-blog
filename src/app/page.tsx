@@ -14,7 +14,7 @@ const Posts = [
   },
   {
     id: "2",
-    image: "/image.png",
+    image: "/image2.png",
     title: "How Apple's M1 Chip makes macOS development much less costly",
     caption:
       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis odit cumque amet sequi quaerat.",
@@ -22,7 +22,7 @@ const Posts = [
   },
   {
     id: "3",
-    image: "/image.png",
+    image: "/image2.png",
     title: "How Apple's M1 Chip makes macOS development much less costly",
     caption:
       "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis odit cumque amet sequi quaerat.",
@@ -41,11 +41,10 @@ const Posts = [
 export default function Home() {
   return (
     <>
-      <Header />
       <main className="md:px-3 max-h-full overflow-hidden">
         {/* Tabs */}
         <section className="md:hidden block px-4 mb-5">
-          <div className="bg-white h-1"></div>
+          <div className="dark:bg-white/80 bg-black/80 border-t" />
         </section>
         {/* Posts */}
         <section className="flex md:grid md:grid-cols-2 gap-5 overflow-x-scroll no-scrollbar">
@@ -63,18 +62,15 @@ export default function Home() {
                   width={200}
                   height={200}
                   loading="lazy"
-                  className="w-full"
+                  className="w-full h-[237px] object-cover rounded-md md:rounded-lg"
                 />
-                <h2 className="text-2xl border-t-2 border-b-2 py-5 capitalize">
+                <h2 className="text-2xl border-t border-b border-black dark:border-white py-5 capitalize">
                   {title}
                 </h2>
                 <p className="text-sm">{caption}</p>
-                <div className="flex flex-row gap-2 text-sm text-slate-500">
+                <div className="flex flex-row gap-2 text-sm text-primary-dark/70 dark:text-primary-light/70">
                   {tags.map((tag) => (
-                    <>
-                      <p>{`#${tag}`}</p>
-                      &#8226;
-                    </>
+                    <p key={tag}>{`#${tag}`}</p>
                   ))}
                 </div>
               </div>

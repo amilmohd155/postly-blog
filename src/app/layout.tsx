@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
+import Header from "@/components/Header";
+import ThemeProviders from "@/app/theme-provider";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +19,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={clsx(inter.className, "antialiased")}>
-        <div className="max-w-3xl mx-auto md:py-12 xl:max-w-5xl xl:px-0 min-h-screen">
-          {children}
-        </div>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={clsx(
+          inter.className,
+          "antialiased bg-primary-light dark:bg-primary-dark text-slate-950 dark:text-white"
+        )}
+      >
+        <ThemeProviders>
+          <div className="max-w-3xl mx-auto xl:max-w-5xl xl:px-0 min-h-screen">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </ThemeProviders>
       </body>
     </html>
   );
