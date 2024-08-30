@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { notFound, useRouter } from "next/navigation";
-import { MdArrowBack, MdBackHand } from "react-icons/md";
+import { notFound } from "next/navigation";
 import { posts } from "#site/content";
+import { MDXComponent } from "@/components/mdx-component";
+import "@/style/mdx.css";
 
 type BlogPageProps = {
   params: {
@@ -24,7 +25,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
     notFound();
   }
   return (
-    <main className="flex-1 max-h-full overflow-hidden">
+    <main className="flex-1">
       <article className="flex-1">
         <Image
           src={blog.cover}
@@ -43,7 +44,9 @@ export default async function BlogPage({ params }: BlogPageProps) {
             <p>{}</p>
           </section>
           <hr />
-          <article></article>
+          <article className="prose dark:prose-invert max-w-none py-5">
+            <MDXComponent code={blog.body} />
+          </article>
         </section>
       </article>
     </main>
