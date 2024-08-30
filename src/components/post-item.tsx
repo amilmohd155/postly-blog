@@ -1,22 +1,28 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Post({
-  id,
-  image,
-  title,
-  caption,
-  tags,
-}: {
-  id: string;
-  image: string;
+type PostItemProps = {
+  slug: string;
   title: string;
-  caption: string;
-  tags: string[];
-}) {
+  description?: string;
+  date: string;
+  published: boolean;
+  cover: any;
+};
+
+export default function PostItem({
+  slug,
+  cover,
+  title,
+  description,
+}: // tags = ,
+PostItemProps) {
+  const id = 1;
+  const tags = ["hello", "world"];
+
   return (
     <Link
-      href={`/blog/${id}`}
+      href={`/blog/${slug}`}
       className="relative min-w-full group/link px-4 md:px-0"
       key={id}
     >
@@ -24,7 +30,7 @@ export default function Post({
       <div className="flex flex-col gap-5 justify-between group-hover/link:scale-95 transition-transform ease-in-out duration-75">
         <Image
           alt="image"
-          src={image}
+          src={cover}
           width={200}
           height={200}
           loading="lazy"
@@ -33,7 +39,7 @@ export default function Post({
         <h2 className="text-2xl border-t border-b border-black dark:border-white py-5 capitalize">
           {title}
         </h2>
-        <p className="text-sm">{caption}</p>
+        {description && <p className="text-sm">{description}</p>}
         <div className="flex flex-row gap-2 text-sm text-primary-dark/70 dark:text-primary-light/70">
           {tags.map((tag) => (
             <p key={tag}>{`#${tag}`}</p>

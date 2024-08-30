@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdArrowBack, MdClose, MdMenu } from "react-icons/md";
-import ThemeSwitch from "./ThemeSwtich";
+import ThemeSwitch from "./theme-swtich";
 
 const MenuItems = ["blogs", "about"];
 const appName = "Postly";

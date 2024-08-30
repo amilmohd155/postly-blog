@@ -1,44 +1,19 @@
 "use client";
-import Post from "@/components/Post";
+import PostItem from "@/components/post-item";
 import { useEffect, useRef, useState } from "react";
 import { Blogs } from "@/data/blogs";
+import { posts } from "#site/content";
+import useHorizontalCarousel from "@/hooks/useHorizontalCarousel";
 
 export default function Home() {
-  const [scrollX, setScrollX] = useState(0);
-  const scrollRef = useRef<HTMLElement | null>(null);
+  const displayPosts = posts;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollRef.current) {
-        const currentScrollX = scrollRef.current.scrollLeft;
-        const windowWidth = window.outerWidth;
+  console.log(
+    "🚀 ~ file: page.tsx:37 ~ Home ~ posts[0].updated:",
+    posts[0].updated
+  );
 
-        if (currentScrollX < windowWidth / 5) {
-          scrollRef.current.scrollLeft = 0;
-        } else {
-          const multiple = Math.floor(currentScrollX / windowWidth);
-          const newScrollX =
-            currentScrollX < multiple * windowWidth + windowWidth / 2
-              ? multiple * windowWidth
-              : (multiple + 1) * windowWidth;
-          scrollRef.current.scrollLeft = newScrollX;
-        }
-      }
-    };
-
-    const element = scrollRef.current;
-
-    if (element) {
-      element.addEventListener("scrollend", handleScroll);
-      // console.log(window.innerWidth);
-    }
-
-    return () => {
-      if (element) {
-        element.removeEventListener("scrollend", handleScroll);
-      }
-    };
-  });
+  const { scrollRef } = useHorizontalCarousel();
 
   return (
     <main className="md:px-3 max-h-full overflow-hidden">
@@ -54,8 +29,8 @@ export default function Home() {
           transition: "scroll-left 0.5s ease-in-out",
         }}
       >
-        {Blogs.map((blog) => (
-          <Post {...blog} />
+        {displayPosts.map((post) => (
+          <PostItem {...post} key={post.slug} />
         ))}
       </section>
     </main>
