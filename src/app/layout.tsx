@@ -5,6 +5,7 @@ import clsx from "clsx";
 import Header from "@/components/header";
 import ThemeProviders from "@/app/theme-provider";
 import Footer from "@/components/footer";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,13 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={clsx(
+        className={cn(
           inter.className,
           "antialiased bg-primary-light dark:bg-primary-dark text-slate-950 dark:text-white"
         )}
       >
         <ThemeProviders>
-          <div className="max-w-3xl mx-auto xl:max-w-5xl xl:px-0 min-h-screen">
+          <div className="max-w-3xl mx-auto xl:max-w-5xl xl:px-0 min-h-screen flex flex-col">
             <Header />
             {children}
             <Footer />

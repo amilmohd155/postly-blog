@@ -27,7 +27,7 @@
       ],
       "#site/content": [
         "./.velite"
-      ]
+      ],
     }
   },
   "include": [

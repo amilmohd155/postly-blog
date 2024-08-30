@@ -22,7 +22,7 @@ PostItemProps) {
 
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={`/${slug}`}
       className="relative min-w-full group/link px-4 md:px-0"
       key={id}
     >
@@ -36,7 +36,7 @@ PostItemProps) {
           loading="lazy"
           className="w-full h-[237px] object-cover rounded-md md:rounded-lg"
         />
-        <h2 className="text-2xl border-t border-b border-black dark:border-white py-5 capitalize">
+        <h2 className="text-2xl border-t border-b border-black/10 dark:border-white/10 py-5 capitalize">
           {title}
         </h2>
         {description && <p className="text-sm">{description}</p>}

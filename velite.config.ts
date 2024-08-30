@@ -12,6 +12,7 @@ const computedFields = <T extends { slug: string }>(data: T) => ({
 
 const execAsyn = promisify(exec);
 
+// Get updatedDate from the git log
 const timestamp = () =>
   s
     .custom<string | undefined>((i) => i === undefined || typeof i === "string")
@@ -37,6 +38,7 @@ const posts = defineCollection({
     .object({
       slug: s.path(),
       title: s.string().max(90),
+      author: s.string().max(90),
       description: s.string().max(999).optional(),
       date: s.isodate(),
       updated: timestamp(),
