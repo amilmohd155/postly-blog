@@ -6,7 +6,10 @@ import { useState } from "react";
 import { MdArrowBack, MdClose, MdMenu } from "react-icons/md";
 import ThemeSwitch from "./theme-swtich";
 
-const MenuItems = ["blogs", "about"];
+const MenuItems = [
+  { label: "blogs", link: "/blog" },
+  { label: "about", link: "/about" },
+];
 const appName = "Postly";
 
 export default function Header() {
@@ -53,12 +56,14 @@ export default function Header() {
               <MdClose />
             </button>
             <ul className="flex-1 mt-6 first-of-type:border-t border-white dark:border-black group/list">
-              {MenuItems.map((label) => (
+              {MenuItems.map(({ label, link }) => (
                 <li
                   key={label}
                   className="py-4 font-semibold tracking-wide border-b border-white dark:border-black focus-within:bg-black"
                 >
-                  <Link href="/">{label}</Link>
+                  <Link href={link} aria-label={label}>
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -87,6 +92,7 @@ export default function Header() {
         <button
           className="absolute left-0 top-0 m-5 p-2 text-2xl md:hidden rounded-full bg-black text-white "
           onClick={() => router.back()}
+          aria-label="Go back"
         >
           <MdArrowBack />
         </button>
@@ -101,9 +107,11 @@ export default function Header() {
             </span>
           </Link>
           <ul className="flex flex-row gap-5 items-center font-semibold text-xl cursor-pointer">
-            {MenuItems.map((label) => (
+            {MenuItems.map(({ label, link }) => (
               <li key={label} className="hover:text-violet-400">
-                {label}
+                <Link href={link} aria-label={label}>
+                  {label}
+                </Link>
               </li>
             ))}
             <li>

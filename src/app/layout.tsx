@@ -30,7 +30,9 @@ export default function RootLayout({
         <ThemeProviders>
           <div className="max-w-3xl mx-auto xl:max-w-5xl xl:px-0 min-h-screen flex flex-col">
             <Header />
-            {children}
+            <main className="md:px-3 md:pb-10 flex-1 max-h-full overflow-hidden">
+              {children}
+            </main>
             <Footer />
           </div>
         </ThemeProviders>
