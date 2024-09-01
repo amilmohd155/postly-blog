@@ -30,7 +30,7 @@ export default function TopBlogs({ posts }: { posts: Post[] }) {
       <ProgessBar width={((blogIndex + 1) / postsLength) * 100} />
 
       {/* Top Blogs */}
-      <section className="relative md:hidden">
+      <section className="relative md:hidden mb-5">
         <motion.div
           drag="x"
           dragConstraints={{

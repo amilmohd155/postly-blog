@@ -8,6 +8,7 @@ type PostItemProps = {
   description?: string;
   date: string;
   published: boolean;
+  tags?: string[];
   cover: any;
 };
 
@@ -16,10 +17,10 @@ export default function PostItem({
   cover,
   title,
   description,
-}: // tags = ,
-PostItemProps) {
+  tags,
+}: PostItemProps) {
   const id = 1;
-  const tags = ["hello", "world"];
+  // const tags = ["hello", "world"];
 
   return (
     <Link
@@ -51,18 +52,18 @@ PostItemProps) {
             {title}
           </h2>
           {description && (
-            <p className="text-sm leading-normal line-clamp-4 md:line-clamp-3 my-2">
-              {description}
-            </p>
+            <p className="text-sm leading-normal my-2">{description}</p>
           )}
-          <div className="flex flex-row gap-2 text-sm text-primary-dark/70 dark:text-primary-light/70">
-            {tags.map((tag) => (
-              <React.Fragment key={tag}>
-                <span className="sr-only">{`Tag: ${tag}`}</span>
-                <p aria-label={`Tag: ${tag}`}>{`#${tag}`}</p>
-              </React.Fragment>
-            ))}
-          </div>
+          {tags && (
+            <div className="flex flex-row gap-2 text-sm text-primary-dark/70 dark:text-primary-light/70">
+              {tags.map((tag) => (
+                <React.Fragment key={tag}>
+                  <span className="sr-only">{`Tag: ${tag}`}</span>
+                  <p aria-label={`Tag: ${tag}`}>{`#${tag}`}</p>
+                </React.Fragment>
+              ))}
+            </div>
+          )}
         </section>
       </article>
     </Link>
