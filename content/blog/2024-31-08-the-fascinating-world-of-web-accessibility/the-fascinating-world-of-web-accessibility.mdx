@@ -2,7 +2,7 @@
 title: "The Fascinating World of Web Accessibility: Enhancing User Experience for Everyone"
 author: Amil Muhammed Hamza
 description: Web accessibility is not just about compliance; it's about creating inclusive digital spaces where everyone, regardless of their abilities, can interact with content seamlessly. In this article, we explore key strategies and techniques to improve web accessibility, complete with visual examples, code snippets, and best practices.
-cover: cover.png
+cover: images/cover.png
 date: 2024-08-31
 published: true
 ---
@@ -17,7 +17,7 @@ Web accessibility is not only a legal requirement in many countries but also an 
 * **Improve SEO**: Search engines reward websites that are well-structured and provide meaningful content, which often aligns with accessibility best practices.
 * **Increase Audience Reach**: Approximately 15% of the global population experiences some form of disability. By making your site accessible, you expand your potential audience.
 
-![Inclusive illustration showing diverse users accessing a website on various devices (e.g., desktop, tablet, and smartphone).](inclusive-web-users.jpeg)
+![Inclusive illustration showing diverse users accessing a website on various devices (e.g., desktop, tablet, and smartphone).](images/inclusive-web-users.jpeg)
 
 #### **Key Strategies for Improving Web Accessibility**
 
@@ -26,16 +26,39 @@ To create a more accessible web experience, consider implementing the following 
 1. **Use Semantic HTML**
    * Ensure that your HTML is semantic, meaning that you use tags according to their intended purpose. For example, use `<header>`, `<nav>`, `<main>`, `<article>`, and `<footer>` tags to structure your page correctly.
    * Screen readers and other assistive technologies rely on semantic HTML to convey information to users accurately.
+   ```html
+   <header>
+      <h1>Web Accessibility Best Practices</h1>
+      <nav>
+         <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#strategies">Strategies</a></li>
+            <li><a href="#resources">Resources</a></li>
+         </ul>
+      </nav>
+   </header>
+   ```
 2. **Provide Text Alternatives for Non-Text Content**
    * All images, videos, and other non-text content should have text alternatives (e.g., `alt` attributes for images). This allows screen readers to describe the content to users who cannot see it.
    * For complex images, consider using a more detailed description or a `<figure>` and `<figcaption>` combination.&#x9;
+   ```html
+   <figure>
+      <img src="inclusive-web-design.png" alt="Illustration showing diverse users accessing the web" />
+      <figcaption>An inclusive illustration depicting diverse users interacting with digital content.</figcaption>
+   </figure>
+   ```
 3. **Ensure Keyboard Accessibility**
    * All interactive elements (e.g., links, buttons, forms) should be accessible via keyboard navigation. This means users should be able to tab through your site and use enter/space to activate elements.
    * Avoid using keyboard traps, where users cannot navigate away from a certain part of the page without using a mouse.
+   ```html
+   <button onfocus="this.style.backgroundColor='yellow';">Click Me</button>
+   ```
 4. **Design for Color Contrast**
 
 * Ensure sufficient color contrast between text and background to make content readable for users with visual impairments. Use tools like WebAIM's Contrast Checker to validate your color choices.
 * Avoid relying solely on color to convey important information.
+
+![A comparison of poor versus good color contrast examples with text on various background colors.](images/color-contrast.jpeg)
 
 **Conclusion**
 

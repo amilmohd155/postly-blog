@@ -41,7 +41,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         className="w-full h-60 md:max-h-52 md:object-cover md:rounded-lg"
       />
       <section className="prose-sm md:prose dark:prose-invert !max-w-none p-5 md:p-0 ">
-        <h1 className="!mt-10 !mb-2">{blog.title}</h1>
+        <h1 className="!mt-0 md:!mt-5 !mb-2">{blog.title}</h1>
         <h3 className="!my-0 dark:font-thin font-light">{blog.description}</h3>
         <section className="flex flex-col md:flex-row justify-between py-5">
           <p className="!my-0">

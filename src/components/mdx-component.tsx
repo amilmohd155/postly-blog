@@ -1,9 +1,19 @@
 import React from "react";
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import * as runtime from "react/jsx-runtime";
+import { cn } from "@/lib/utils";
 
 const sharedComponents = {
-  Image,
+  img: ({ className, alt, ...props }: ImageProps) => (
+    <Image
+      className={cn("rounded max-w-full", className)}
+      alt={alt}
+      {...props}
+      width={1024}
+      height={100}
+      loading="lazy"
+    />
+  ),
 };
 const useMDXComponent = (code: string) => {
   const fn = new Function(code);

@@ -17,7 +17,7 @@ export default function BlogsPage() {
           {allBlogs.map((blog) => (
             <li key={blog.slug}>
               <Link href={`/${blog.slug}`}>
-                <article className="px-2 py-1 md:p-3 border border-black rounded">
+                <article className="px-2 py-1 md:p-3 border border-secodary-dark dark:border-secodary-dark rounded my-5">
                   <h2 className="text-lg font-semibold">{blog.title}</h2>
 
                   <h3 className="hidden md:block py-2 text-base">

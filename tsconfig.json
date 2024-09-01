@@ -28,6 +28,9 @@
       "#site/content": [
         "./.velite"
       ],
+      "@config/*": [
+        "./config/*"
+      ]
     }
   },
   "include": [
