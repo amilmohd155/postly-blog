@@ -39,7 +39,7 @@ export default function MobileNav() {
           <ThemeSwitch className="text-2xl" />
           <div
             className={cn(
-              "fixed bottom-0 left-0 right-0 top-0 px-4 py-5 z-50 flex flex-col bg-secodary-light dark:bg-secodary-dark text-white dark:text-slate-950 transition-transform duration-300 ease-in-out md:hidden",
+              "fixed bottom-0 left-0 right-0 top-0 px-4 py-5 z-50 grid grid-rows-[auto,1fr,auto] bg-secodary-light dark:bg-secodary-dark text-white dark:text-slate-950 transition-transform duration-300 ease-in-out md:hidden",
               open ? "translate-x-0" : "-translate-x-[100%]"
             )}
           >
@@ -52,16 +52,14 @@ export default function MobileNav() {
             >
               <MdClose />
             </button>
-            <ul className="flex-1 mt-6 first-of-type:border-t border-white dark:border-black group/list">
+            <ul className="my-6 first-of-type:border-t border-white dark:border-black">
               {HeaderNavLinks.map(({ title, href }) => (
-                <li
-                  key={title}
-                  className="py-4 font-semibold tracking-wide border-b border-white dark:border-black focus-within:bg-black"
-                >
+                <li key={title}>
                   <MobileLink
                     href={href}
                     aria-label={title}
                     onOpenChange={setOpen}
+                    className="block py-4 font-semibold tracking-wide border-b border-white dark:border-black focus-within:bg-black"
                   >
                     {title}
                   </MobileLink>
@@ -90,13 +88,27 @@ export default function MobileNav() {
           </div>
         </div>
       ) : (
-        <button
-          className="absolute left-0 top-0 m-5 p-2 text-2xl md:hidden rounded-full bg-black text-white "
-          onClick={() => router.back()}
-          aria-label="Go back"
+        <div
+          className={cn(
+            HeaderNavLinks.some((link) => link.href === pathName)
+              ? "relative"
+              : "absolute left-0 top-0 right-0",
+            "md:hidden m-5 grid grid-cols-[auto,1fr] gap-2 items-center"
+          )}
         >
-          <MdArrowBack />
-        </button>
+          <button
+            className=" text-2xl dark:text-secodary-dark text-secodary-light"
+            onClick={() => router.back()}
+            aria-label="Go back"
+          >
+            <MdArrowBack />
+          </button>
+          {HeaderNavLinks.some((link) => link.href === pathName) && (
+            <p className="text-2xl font-semibold bg-gradient-to-tl from-blue-600 via-rose-400 to-indigo-400 inline-block text-transparent bg-clip-text ">
+              {HeaderNavLinks.find((link) => link.href === pathName)?.title}
+            </p>
+          )}
+        </div>
       )}
     </>
   );

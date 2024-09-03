@@ -1,39 +1,48 @@
 import { posts } from "#site/content";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function BlogsPage() {
   const allBlogs = posts;
 
   return (
-    <article className="p-5 md:p-0">
-      <section className="mt-12 md:mt-0 pb-5 text-center">
-        <h1 className="text-2xl font-semibold bg-gradient-to-tl from-blue-600 via-rose-400 to-indigo-400 inline-block text-transparent bg-clip-text uppercase">
-          All blogs
-        </h1>
-      </section>
+    <article className="px-5 md:p-0">
       <section>
-        <ul>
+        <ul className="flex flex-col gap-4">
           {allBlogs.map((blog) => (
             <li key={blog.slug}>
-              <Link href={`/${blog.slug}`}>
-                <article className="px-2 py-1 md:p-3 border border-secodary-dark dark:border-secodary-dark rounded my-5">
-                  <h2 className="text-lg font-semibold">{blog.title}</h2>
+              <Link href={`/${blog.slug}`} className="group">
+                <article className="grid md:grid-cols-[1fr,3fr,auto] rounded group-hover:md:shadow-md dark:bg-secodary-light bg-secodary-dark">
+                  <Image
+                    src={blog.cover}
+                    alt={`Cover image for ${blog.title}`}
+                    width={512}
+                    height={100}
+                    className="aspect-video rounded-t md:rounded-l object-cover min-h-full"
+                  />
 
-                  <h3 className="hidden md:block py-2 text-base">
-                    {blog.description}
-                  </h3>
-                  <section className="flex flex-col md:flex-row text-sm md:justify-between">
-                    <p className="text-sm">
-                      Written by <strong>{blog.author}</strong>
+                  <div className="grid grid-rows-[auto,1fr,auto] px-5 py-3">
+                    <header>
+                      <h2 className="text-lg font-semibold">{blog.title}</h2>
+                    </header>
+
+                    <p className="hidden md:block py-2 text-base">
+                      {blog.description}
                     </p>
-                    <p className="text-sm">
-                      Published on {` `}
-                      <time dateTime={formatDate(blog.date)}>
-                        {formatDate(blog.date)}
-                      </time>
-                    </p>
-                  </section>
+
+                    <footer className="flex flex-col md:flex-row text-sm md:justify-between">
+                      <p className="text-sm">
+                        Written by <strong>{blog.author}</strong>
+                      </p>
+                      <p className="text-sm">
+                        Published on {` `}
+                        <time dateTime={formatDate(blog.date)}>
+                          {formatDate(blog.date)}
+                        </time>
+                      </p>
+                    </footer>
+                  </div>
                 </article>
               </Link>
             </li>

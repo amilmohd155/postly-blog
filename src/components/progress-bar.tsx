@@ -39,7 +39,7 @@ const ProgessBar = ({ width }: { width: number }) => {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(791 -169) rotate(148.621) scale(755.366 806.156)"
           >
-            <stop stop-color="#2563EB" />
+            <stop stopColor="#2563EB" />
             <stop offset="0.500563" stopColor="#FB7185" />
             <stop offset="1" stopColor="#818CF8" />
           </radialGradient>
