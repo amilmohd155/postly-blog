@@ -3,7 +3,7 @@ export const siteConfig = {
   headerTitle: "Postly - Next.js Blog",
   url: "http://localhost:3000",
   year: 2024,
-  repository: "",
+  repository: "https://github.com/amilmohd155/nextjs-blog",
   icon: `${process.env.BASE_PATH || ""}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ""}/static/images/twitter-card.png`,
   description: "Nextjs 14 blog using velite and tailwind",
@@ -13,7 +13,7 @@ export const siteConfig = {
   links: {
     twitter: "",
     github: "",
-    website: "",
+    website: "https://amilmohd155.vercel.app/",
     linkedin: "https://www.linkedin.com",
   },
 };
