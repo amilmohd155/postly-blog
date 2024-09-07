@@ -7,7 +7,7 @@ import { FaGithub, FaUser } from "react-icons/fa6";
 export const metadata: Metadata = {
   title: "About",
 };
-
+// About page
 export default function AboutPage() {
   return (
     <article className="prose grid min-w-full gap-2 dark:prose-invert lg:mt-20 lg:grid-cols-[auto,1fr,auto]">
