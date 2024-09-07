@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Postly",
   headerTitle: "Postly - Next.js Blog",
-  url: "http://localhost:3000",
+  url: process.env.VERCEL_URL || "localhost:3000",
   year: 2024,
   repository: "https://github.com/amilmohd155/nextjs-blog",
   icon: `${process.env.BASE_PATH || ""}/static/images/logo.png`,
