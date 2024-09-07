@@ -14,7 +14,7 @@ export default function AboutPage() {
       <header className="flex flex-col items-center gap-2">
         <Image
           alt=""
-          src="/static/about.jpg"
+          src="/about.jpg"
           width={192}
           height={192}
           className="!my-0 w-40 rounded-full"
