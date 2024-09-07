@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import clsx from "clsx";
 import Header from "@/components/header";
 import ThemeProviders from "@/app/theme-provider";
 import Footer from "@/components/footer";
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  metadataBase: new URL(siteConfig.url),
+  // metadataBase: new URL(siteConfig.url),
   alternates: {
     canonical: "/",
   },
@@ -33,6 +32,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log(process.env.VERCEL_URL);
+
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body

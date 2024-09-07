@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Postly",
   headerTitle: "Postly - Next.js Blog",
-  url: process.env.VERCEL_URL || "http://localhost:3000",
+  url: "https://postly-amil.vercel.app/",
   year: 2024,
   repository: "https://github.com/amilmohd155/nextjs-blog",
   icon: `${process.env.BASE_PATH || ""}/static/images/logo.png`,
@@ -12,7 +12,7 @@ export const siteConfig = {
   author: "Amil Muhammed Hamza",
   links: {
     twitter: "",
-    github: "",
+    github: "https://github.com/amilmohd155",
     website: "https://amilmohd155.vercel.app/",
     linkedin: "https://www.linkedin.com",
   },
