@@ -6,9 +6,7 @@ export default function HeroSection() {
   return (
     <article className="prose mb-5 hidden min-w-full flex-col items-center rounded-lg py-5 shadow-md dark:prose-invert dark:bg-slate-300/10 dark:shadow-none md:flex">
       <header>
-        <h1 className="my-0 inline-block bg-gradient-to-tl from-blue-600 via-rose-400 to-indigo-400 bg-clip-text text-transparent">
-          Postly
-        </h1>
+        <h1 className="postly my-0 inline-block">Postly</h1>
         <p className="sr-only">Blog title: Postly</p>{" "}
         {/* Optional: Hidden for screen readers */}
       </header>

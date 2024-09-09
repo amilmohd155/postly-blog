@@ -32,8 +32,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log(process.env.VERCEL_URL);
-
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
