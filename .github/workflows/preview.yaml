@@ -7,10 +7,10 @@ env:
 on:
   push:
     branches-ignore:
-      - main
+      - master
 
 jobs:
-  Deployment-Production:
+  Deployment-Preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

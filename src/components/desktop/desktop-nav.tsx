@@ -29,7 +29,7 @@ export default function DesktopNav() {
                   pathName === href
                     ? "text-indigo-400"
                     : "text-primary-dark dark:text-primary-light",
-                  "hover:text-rose-400",
+                  "hover:text-rose-400 dark:hover:text-rose-400",
                 )}
               >
                 {title}

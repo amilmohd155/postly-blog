@@ -31,3 +31,8 @@ body {
     scrollbar-width: none;
   }
 }
+@layer components {
+  .postly {
+    @apply bg-gradient-to-tl from-blue-600 via-rose-400 to-indigo-400 bg-clip-text text-transparent;
+  }
+}
