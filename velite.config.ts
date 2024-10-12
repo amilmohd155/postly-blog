@@ -4,11 +4,15 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import { promisify } from "util";
 import { exec } from "child_process";
+import rehypeToc from "@stefanprobst/rehype-extract-toc";
+import rehypeTocExtract from "@stefanprobst/rehype-extract-toc/mdx";
 
-const computedFields = <T extends { slug: string }>(data: T) => ({
-  ...data,
-  slugAsParams: data.slug.split("/").slice(1).join("/"),
-});
+const computedFields = <T extends { slug: string }>(data: T) => {
+  return {
+    ...data,
+    slugAsParams: data.slug.split("/").slice(1).join("/"),
+  };
+};
 
 const execAsyn = promisify(exec);
 
@@ -62,7 +66,9 @@ export default defineConfig({
   collections: { posts },
   mdx: {
     rehypePlugins: [
-      rehypeSlug as any,
+      rehypeSlug,
+      rehypeToc,
+      [rehypeTocExtract, { name: "toc" }],
       [rehypePrettyCode, { theme: "github-dark" }],
       [
         rehypeAutolinkHeadings,
@@ -75,6 +81,6 @@ export default defineConfig({
         },
       ],
     ],
-    remarkPlugins: [],
+    // remarkPlugins: [remarkToc],
   },
 });

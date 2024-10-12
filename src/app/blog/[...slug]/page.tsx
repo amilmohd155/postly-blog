@@ -2,9 +2,24 @@ import "@/style/mdx.css";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { posts } from "#site/content";
-import { MDXComponent } from "@/components/mdx-component";
-import { formatDate } from "@/lib/utils";
+import { MDXComponent, MDXTableOfContents } from "@/components/mdx-component";
+import { cn, formatDate } from "@/lib/utils";
 import { Metadata } from "next";
+import Link from "next/link";
+import { GoTopButton, ToC } from "@/components/toc";
+import { BiLink, BiUpArrow, BiUpArrowCircle } from "react-icons/bi";
+import { FaLinkedin, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
+import { BsTwitterX } from "react-icons/bs";
+import { CopyToClipboard, SocialShare } from "@/components/social-share";
+import { siteConfig } from "@config/site";
+import {
+  HiCheck,
+  HiClipboard,
+  HiOutlineClipboard,
+  HiOutlineClipboardDocument,
+} from "react-icons/hi2";
+import { Content } from "@/components/content";
+import { BlogPageComponent } from "@/components/blog-page";
 
 type BlogPageProps = {
   params: {
@@ -52,29 +67,8 @@ export default async function BlogPage({ params }: BlogPageProps) {
   if (!blog || !blog.published) {
     notFound();
   }
-  return (
-    <article className="flex-1">
-      <Image
-        src={blog.cover}
-        alt={`Image`}
-        width={400}
-        height={400}
-        className="h-60 w-full md:max-h-52 md:rounded-lg md:object-cover"
-      />
-      <section className="prose-sm !max-w-none p-5 dark:prose-invert md:prose md:p-0">
-        <h1 className="!mb-2 !mt-0 md:!mt-5">{blog.title}</h1>
-        <h3 className="!my-0 font-light dark:font-thin">{blog.description}</h3>
-        <section className="flex flex-col justify-between py-5 md:flex-row">
-          <p className="!my-0">
-            Written by <b>{blog.author}</b>
-          </p>
-          <p className="!my-0">{formatDate(blog.date)}</p>
-        </section>
-        <hr className="not-prose h-px border-0 bg-gray-500/30 dark:bg-gray-700" />
-        <article className="py-5">
-          <MDXComponent code={blog.body} />
-        </article>
-      </section>
-    </article>
-  );
+
+  const tableOfContents = MDXTableOfContents({ code: blog.body });
+
+  return <BlogPageComponent blog={blog} tableOfContents={tableOfContents} />;
 }

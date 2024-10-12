@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Raleway } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import ThemeProviders from "@/app/theme-provider";
@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { siteConfig } from "@config/site";
 
 const inter = Inter({ subsets: ["latin"] });
+const raleway = Raleway({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -36,17 +37,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
         className={cn(
-          inter.className,
-          "bg-primary-light text-slate-950 antialiased dark:bg-primary-dark dark:text-white",
+          raleway.className,
+          "bg-background text-foreground antialiased",
         )}
       >
         <ThemeProviders>
-          <div className="mx-auto flex min-h-screen max-w-3xl flex-col xl:max-w-5xl xl:px-0">
+          <div className="mx-auto flex h-screen max-w-3xl flex-col lg:max-w-7xl">
             <Header />
-            <main className="max-h-full flex-1 overflow-hidden md:px-3 md:pb-10">
-              {children}
-            </main>
-            <Footer />
+            {children}
+            {/* <Footer /> */}
           </div>
         </ThemeProviders>
       </body>

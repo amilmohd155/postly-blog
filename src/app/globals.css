@@ -1,23 +1,112 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 235, 235, 235;
-}
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 20, 20, 20;
+    --background: 0 0% 100%; /* White background */
+
+    --foreground: 220 15% 15%; /* Darker foreground for readability */
+    --foreground-invert: 255 100% 100%; /* Light inverted text color */
+
+    --primary: 41 55% 61%;
+    --primary-foreground: 0 0% 100%;
+
+    --accent: 340 82% 57%;
+    --accent-foreground: 0 0% 100%;
+
+    --secondary: 210 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 100 5% 30%;
+    --muted-foreground: 0 0% 47%;
+    --card: 100 10% 18%;
+    --card-foreground: 255 99% 99%;
+
+    --tertiary: 60 50% 50%;
+    --tertiary-foreground: 0 0% 0%;
+
+    --input: 0 0% 100%;
+    --input-foreground: 42 49% 62%;
+
+    --border: 0 0% 85%;
+
+    --ring: 41 55% 61%;
+
+    --tag: 41 55% 61%;
+    --tag-foreground: 0 0% 100%;
+    --tag-invert: 0 0% 100%;
+    --tag-foregound-invert: 0 0% 100%;
+    --tag-accent: 210 70% 45%;
+  }
+  .dark {
+    --background: 100 6% 10%;
+
+    --foreground: 255 99% 99%;
+    --foreground-invert: 31 37% 14%;
+
+    --primary: 42 28% 82%;
+    --primary-foreground: 0 0% 0%;
+
+    --accent: 340 82% 57%;
+    --accent-foreground: 0 0% 100%;
+
+    --secondary: 210 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 100 5% 30%;
+    --muted-foreground: 100 5% 80%;
+
+    --card: 100 10% 18%;
+    --card-foreground: 255 99% 99%;
+
+    --tertiary: 60 50% 50%;
+    --tertiary-foreground: 0 0% 0%;
+
+    --input: 100 7% 20%;
+    --input-foreground: 255 99% 99%;
+
+    --border: 0 0% 85%;
+
+    --ring: 42 28% 82%;
+
+    --shadow: 0 0% 85%;
+
+    --tag: 42 28% 82%;
+    --tag-foreground: 0 0% 0%;
+    --tag-invert: 0 0% 100%;
+    --tag-foregound-invert: 0 0% 100%;
+    --tag-accent: 210 70% 45%;
+
+    /* --card-a: #395756; */
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  .CollapsibleContent[data-state="open"] {
+    animation: slideDown 400ms ease-out;
+  }
+  .CollapsibleContent[data-state="closed"] {
+    animation: slideUp 400ms ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 10%;
+      transform: translateY(-1rem);
+    }
+  }
+
+  @keyframes slideUp {
+    to {
+      opacity: 10%;
+      transform: translateY(-1rem);
+    }
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-} */
 
 @layer utilities {
   .text-balance {
