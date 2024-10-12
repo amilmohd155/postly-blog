@@ -18,98 +18,104 @@ export default function MobileNav() {
   return (
     <>
       {pathName === "/" ? (
-        <div className="flex flex-row items-center justify-between gap-5 px-4 py-5 md:hidden">
+        <div className="flex flex-row items-center justify-between gap-3 p-4 text-2xl md:hidden">
           <button
             type="button"
             aria-expanded={open}
             aria-label="Open menu"
-            className="text-2xl"
+            className="rounded-full border border-border p-2"
             onClick={() => setOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
             <MdMenu />
           </button>
-          <div className="flex items-center gap-2">
-            <Link href="/" aria-label="Logo">
-              <span className="inline-block bg-gradient-to-tl from-blue-600 via-rose-400 to-indigo-400 bg-clip-text text-2xl font-semibold text-transparent">
-                {siteConfig.name}
-              </span>
-            </Link>
+          <div className="flex flex-1 items-center justify-center rounded-full border border-border px-3 py-1 text-center">
+            <span className="postly font-semibold">{siteConfig.name}</span>
           </div>
-          <ThemeSwitch className="text-2xl" />
-          <div
-            className={cn(
-              "fixed bottom-0 left-0 right-0 top-0 z-50 grid grid-rows-[auto,1fr,auto] bg-secodary-light px-4 py-5 text-white transition-transform duration-300 ease-in-out dark:bg-secodary-dark dark:text-slate-950 md:hidden",
-              open ? "translate-x-0" : "-translate-x-[100%]",
-            )}
-          >
-            <button
-              type="button"
-              aria-label="Close menu"
-              aria-expanded={open}
-              className="p-2 text-2xl"
-              onClick={() => setOpen(false)}
-            >
-              <MdClose />
-            </button>
-            <ul className="my-6 border-white first-of-type:border-t dark:border-black">
-              {HeaderNavLinks.map(({ title, href }) => (
-                <li key={title}>
-                  <MobileLink
-                    href={href}
-                    aria-label={title}
-                    onOpenChange={setOpen}
-                    className="block border-b border-white py-4 font-semibold tracking-wide focus-within:bg-black dark:border-black"
-                  >
-                    {title}
-                  </MobileLink>
-                </li>
-              ))}
-            </ul>
-            <div>
-              <span>
-                <p className="inline-block bg-gradient-to-tl from-blue-600 via-rose-400 to-indigo-400 bg-clip-text py-2 text-3xl font-semibold text-transparent">
-                  {siteConfig.name}
-                </p>
-                {` `}&copy; {siteConfig.year}
-              </span>
-              <p>
-                Created by <b>{siteConfig.author}</b>
-              </p>
-              <span>
-                Built with{" "}
-                <ul className="ml-5 inline-flex list-disc gap-5 font-semibold tracking-wide text-white/70 dark:text-black/70">
-                  <li>TailwindCSS</li>
-                  <li>Nextjs</li>
-                  <li>Vercel</li>
-                </ul>
-              </span>
-            </div>
+          <div className="rounded-full border border-border p-2">
+            <span className="sr-only">Change theme</span>
+            <ThemeSwitch size={24} />
           </div>
+          <Drawable open={open} setOpen={setOpen} />
         </div>
       ) : (
-        <div
-          className={cn(
-            HeaderNavLinks.some((link) => link.href === pathName)
-              ? "relative"
-              : "absolute left-0 right-0 top-0",
-            "m-5 grid grid-cols-[auto,1fr] items-center gap-2 md:hidden",
-          )}
-        >
-          <button
-            className="text-2xl text-secodary-light dark:text-secodary-dark"
-            onClick={() => router.push("/")}
-            aria-label="Go back"
-          >
-            <MdArrowBack />
-          </button>
-          {HeaderNavLinks.some((link) => link.href === pathName) && (
-            <p className="inline-block bg-gradient-to-tl from-blue-600 via-rose-400 to-indigo-400 bg-clip-text text-2xl font-semibold text-transparent">
-              {HeaderNavLinks.find((link) => link.href === pathName)?.title}
-            </p>
-          )}
-        </div>
+        HeaderNavLinks.some((link) => link.href === pathName) && (
+          <div className="relative m-5 grid grid-cols-[auto,1fr] items-center gap-2 md:hidden">
+            <button
+              className="rounded-full border border-border p-1"
+              onClick={() => router.push("/")}
+              aria-label="Return to homepage"
+            >
+              <span className="sr-only">Return to homepage</span>
+
+              <MdArrowBack />
+            </button>
+            {HeaderNavLinks.some((link) => link.href === pathName) && (
+              <p className="max-w-fit rounded-full border border-border px-6 text-center">
+                {HeaderNavLinks.find((link) => link.href === pathName)?.title}
+              </p>
+            )}
+          </div>
+        )
       )}
     </>
   );
 }
+
+type DrawableProps = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+};
+const Drawable = ({ open, setOpen }: DrawableProps) => {
+  return (
+    <div
+      className={cn(
+        "fixed bottom-0 left-0 right-0 top-0 z-50 grid grid-rows-[auto,1fr,auto] bg-card px-4 py-5 text-base text-card-foreground transition-transform duration-300 ease-in-out md:hidden",
+        open ? "translate-x-0" : "-translate-x-[100%]",
+      )}
+    >
+      <button
+        type="button"
+        aria-label="Close menu"
+        aria-expanded={open}
+        className="max-w-fit rounded-full border border-border p-2 text-2xl"
+        onClick={() => setOpen(false)}
+      >
+        <span className="sr-only">Close main menu</span>
+        <MdClose />
+      </button>
+      <ul className="my-6 space-y-3">
+        {HeaderNavLinks.map(({ title, href }) => (
+          <li key={title}>
+            <MobileLink
+              href={href}
+              aria-label={title}
+              onOpenChange={setOpen}
+              className="block rounded-full border border-border px-3 py-4 font-semibold tracking-wide"
+            >
+              {title}
+            </MobileLink>
+          </li>
+        ))}
+      </ul>
+      <div className="flex flex-col rounded-xl border border-border px-3 py-4">
+        <span>
+          <p className="postly inline-flex py-2 text-3xl font-semibold">
+            {siteConfig.name}
+          </p>
+          {` `}&copy; {siteConfig.year}
+        </span>
+        <p>
+          Created by <em>{siteConfig.author}</em>
+        </p>
+        <span>
+          Built with <strong>Next.js</strong>, <strong>TailwindCSS</strong>,{" "}
+          <strong>GSAP</strong>, and <strong>MDX</strong>
+        </span>
+        <span>
+          Deployed on <strong>Vercel</strong>
+        </span>
+      </div>
+    </div>
+  );
+};

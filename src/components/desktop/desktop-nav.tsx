@@ -11,36 +11,32 @@ export default function DesktopNav() {
   const pathName = usePathname();
 
   return (
-    <div className="relative z-50 hidden w-full px-4 py-5 md:block">
-      <div className="flex flex-row items-baseline justify-between text-2xl tracking-wide">
-        <Link href="/" aria-label="Logo" title={siteConfig.name}>
-          <span className="inline-block bg-gradient-to-tl from-blue-600 via-rose-400 to-indigo-400 bg-clip-text text-transparent md:block">
-            {siteConfig.name}
-          </span>
-        </Link>
-        <ul className="flex cursor-pointer flex-row items-center gap-5 text-xl font-semibold">
-          {HeaderNavLinks.map(({ title, href }) => (
-            <li key={title}>
-              <Link
-                href={href}
-                aria-label={title}
-                title={title}
-                className={cn(
-                  pathName === href
-                    ? "text-indigo-400"
-                    : "text-primary-dark dark:text-primary-light",
-                  "hover:text-rose-400 dark:hover:text-rose-400",
-                )}
-              >
-                {title}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <ThemeSwitch />
+    <div className="relative z-50 my-2 hidden flex-1 flex-row items-center rounded-full border border-border px-4 py-[1px] text-xl tracking-wide md:mx-4 md:flex">
+      <Link href="/" aria-label="Logo" title={siteConfig.name}>
+        <span className="postly block px-10 py-2">{siteConfig.name}</span>
+      </Link>
+      <ul className="flex flex-1 cursor-pointer flex-row items-center gap-x-1 text-sm font-semibold">
+        {HeaderNavLinks.map(({ title, href }) => (
+          <li key={title}>
+            <Link
+              href={href}
+              aria-label={title}
+              title={title}
+              className={cn(
+                pathName === href
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border text-primary",
+                "rounded-full border px-10 py-2 capitalize hover:border-primary hover:bg-primary hover:text-primary-foreground",
+              )}
+            >
+              {title}
+            </Link>
           </li>
-        </ul>
-      </div>
+        ))}
+        <li className="absolute right-2 rounded-full border border-border text-sm text-primary hover:border-primary hover:bg-primary hover:text-primary-foreground">
+          <ThemeSwitch className="p-2" />
+        </li>
+      </ul>
     </div>
   );
 }

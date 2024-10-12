@@ -14,6 +14,15 @@ const nextConfig = {
   //   config.plugins.push(new VeliteWebpackPlugin());
   //   return config;
   // },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
