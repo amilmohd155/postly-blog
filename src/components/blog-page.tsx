@@ -57,8 +57,8 @@ export const BlogPageComponent = ({ blog, tableOfContents }: BlogPageProps) => {
   );
 
   return (
-    <main className="mx-4 mb-4 grid grid-cols-1 space-y-2 overflow-hidden pt-5 md:grid-cols-6 md:grid-rows-1 md:gap-3 md:pt-0">
-      <article className="col-span-1 row-span-1 flex-1 space-y-5 rounded-lg border p-4 transition-all duration-700 md:col-span-2">
+    <main className="mx-4 mb-4 grid grid-cols-1 space-y-2 overflow-hidden pt-5 md:grid-cols-6 md:grid-rows-1 md:gap-3 md:space-y-0 md:pt-0">
+      <article className="col-span-1 row-span-1 flex-1 space-y-5 rounded-lg border border-border p-4 transition-all duration-700 md:col-span-2">
         <div className="relative">
           <button
             className="absolute left-0 top-0 rounded-full border p-1 text-2xl md:hidden"
@@ -96,9 +96,9 @@ export const BlogPageComponent = ({ blog, tableOfContents }: BlogPageProps) => {
       <article
         id="content"
         ref={parentRef}
-        className="prose-sm relative col-span-1 row-span-1 !max-w-none overflow-y-auto overflow-x-hidden rounded-lg border p-4 scrollbar-thin scrollbar-track-rounded-full scrollbar-thumb-rounded-full dark:prose-invert md:prose md:col-span-4"
+        className="prose-sm relative col-span-1 row-span-1 !max-w-none overflow-y-auto overflow-x-hidden rounded-lg border border-border p-4 scrollbar-thin scrollbar-track-rounded-full scrollbar-thumb-rounded-full dark:prose-invert md:prose md:col-span-4"
       >
-        <div className="relative h-[80%] w-full bg-black/80 dark:bg-transparent md:rounded-lg">
+        <div className="relative h-[80%] w-full rounded-lg bg-black/80 dark:bg-transparent">
           <Image
             src={blog.cover}
             alt={`Image`}
@@ -118,7 +118,7 @@ export const BlogPageComponent = ({ blog, tableOfContents }: BlogPageProps) => {
             </p>
           </section>
         </div>
-        <hr />
+        <hr className="border-border/50" />
         <div ref={contentRef} className="pb-12 md:pb-0">
           <MDXComponent code={blog.body} />
         </div>

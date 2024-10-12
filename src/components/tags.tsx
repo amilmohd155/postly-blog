@@ -84,11 +84,13 @@ export const Tag = ({
   return (
     <button
       className={cn(
-        "flex items-center rounded-full border px-2 py-2 capitalize md:gap-1 lg:gap-2 lg:px-3",
+        "flex items-center gap-0.5 rounded-full border border-border px-2 py-2 capitalize md:gap-1 lg:gap-2 lg:px-3",
         className,
-        active ? "bg-tag text-tag-foreground" : "text-tag",
+        active
+          ? "border-tag bg-tag text-tag-foreground"
+          : "text-tag-foreground-invert",
         effects &&
-          "transition-all duration-300 hover:scale-95 hover:bg-tag hover:text-tag-foreground",
+          "transition-all duration-300 hover:scale-95 hover:border-tag hover:bg-tag hover:text-tag-foreground",
       )}
       onClick={() => onSelectTag && onSelectTag(tag)}
     >

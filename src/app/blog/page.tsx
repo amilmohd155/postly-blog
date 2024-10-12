@@ -355,7 +355,7 @@ export default function BlogsPage({
             totalCount={tagsQuery || query ? blogs.length : totalPosts.length}
           />
         </header>
-        <section className="col-span-4 row-span-1 rounded-xl border p-4">
+        <section className="col-span-4 row-span-1 rounded-xl border border-border p-4">
           <ul className="grid h-full grid-cols-4 grid-rows-2 gap-4">
             {blogs.slice(start, end).map((blog) => (
               <li key={blog.slug} className="col-span-2 row-auto">

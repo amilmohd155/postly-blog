@@ -11,7 +11,7 @@ export default function DesktopNav() {
   const pathName = usePathname();
 
   return (
-    <div className="relative z-50 my-2 hidden flex-1 flex-row items-center rounded-full border px-4 py-[1px] text-xl tracking-wide md:mx-4 md:flex">
+    <div className="relative z-50 my-2 hidden flex-1 flex-row items-center rounded-full border border-border px-4 py-[1px] text-xl tracking-wide md:mx-4 md:flex">
       <Link href="/" aria-label="Logo" title={siteConfig.name}>
         <span className="postly block px-10 py-2">{siteConfig.name}</span>
       </Link>
@@ -24,16 +24,16 @@ export default function DesktopNav() {
               title={title}
               className={cn(
                 pathName === href
-                  ? "bg-primary text-primary-foreground"
-                  : "text-primary",
-                "rounded-full border px-10 py-2 capitalize hover:bg-primary hover:text-primary-foreground",
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border text-primary",
+                "rounded-full border px-10 py-2 capitalize hover:border-primary hover:bg-primary hover:text-primary-foreground",
               )}
             >
               {title}
             </Link>
           </li>
         ))}
-        <li className="absolute right-2 rounded-full border text-sm text-primary hover:bg-primary hover:text-primary-foreground">
+        <li className="absolute right-2 rounded-full border border-border text-sm text-primary hover:border-primary hover:bg-primary hover:text-primary-foreground">
           <ThemeSwitch className="p-2" />
         </li>
       </ul>

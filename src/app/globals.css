@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* White background */
+    --background: 42 25% 92%;
 
     --foreground: 220 15% 15%; /* Darker foreground for readability */
     --foreground-invert: 255 100% 100%; /* Light inverted text color */
@@ -20,8 +20,9 @@
 
     --muted: 100 5% 30%;
     --muted-foreground: 0 0% 47%;
-    --card: 100 10% 18%;
-    --card-foreground: 255 99% 99%;
+
+    --card: 41 100% 84%;
+    --card-foreground: 0 2% 32%;
 
     --tertiary: 60 50% 50%;
     --tertiary-foreground: 0 0% 0%;
@@ -29,7 +30,7 @@
     --input: 0 0% 100%;
     --input-foreground: 42 49% 62%;
 
-    --border: 0 0% 85%;
+    --border: 0 2% 32%;
 
     --ring: 41 55% 61%;
 
@@ -38,6 +39,11 @@
     --tag-invert: 0 0% 100%;
     --tag-foregound-invert: 0 0% 100%;
     --tag-accent: 210 70% 45%;
+
+    --bento-a: 24 71% 69%;
+    --bento-b: 73 44% 71%;
+    --bento-c: 48 84% 73%;
+    --bento-d: 205 26% 78%;
   }
   .dark {
     --background: 100 6% 10%;
@@ -78,7 +84,10 @@
     --tag-foregound-invert: 0 0% 100%;
     --tag-accent: 210 70% 45%;
 
-    /* --card-a: #395756; */
+    --bento-a: 24 71% 69%;
+    --bento-b: 73 44% 71%;
+    --bento-c: 48 84% 73%;
+    --bento-d: 205 26% 78%;
   }
 
   html,

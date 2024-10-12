@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="mx-4 mb-5 grid max-w-none flex-1 gap-2 pb-5 md:grid-cols-2 md:overflow-hidden md:pb-0">
-      <article className="prose prose-sm relative rounded-xl border p-5 dark:prose-invert lg:prose">
+      <article className="prose prose-sm relative rounded-xl border border-border p-5 dark:prose-invert lg:prose">
         <p className="max-w-fit rounded-full border border-border/50 px-2 py-1">
           About Postly
         </p>
@@ -30,7 +30,8 @@ export default function AboutPage() {
           <p>
             Postly is a personal blogging website developed by Amil Muhammed
             Hamza using modern technologies like <strong>Next.js</strong>,{" "}
-            <strong>Tailwind CSS</strong>, <strong>MDX</strong>, and{` `}
+            <strong>Tailwind CSS</strong>, <strong>GSAP</strong>,{" "}
+            <strong>MDX</strong>, and{` `}
             <strong>Velite</strong>. Designed for performance and seamless
             content management, Postly allows dynamic blogging with markdown and
             React components using MDX. The interface, styled with Tailwind CSS,
@@ -49,7 +50,7 @@ export default function AboutPage() {
           />
         </section>
       </article>
-      <article className="prose prose-sm relative rounded-xl border p-5 dark:prose-invert lg:prose">
+      <article className="prose prose-sm relative rounded-xl border border-border p-5 dark:prose-invert lg:prose">
         <p className="max-w-fit rounded-full border border-border/50 px-2 py-1">
           About Author
         </p>
@@ -79,7 +80,7 @@ export default function AboutPage() {
             <SocialButton
               url={siteConfig.links.website}
               title="Go to my portfolio page"
-              label="Website"
+              label="Portfolio"
               icon={<FaLink />}
             />
             <SocialButton
@@ -114,7 +115,7 @@ const SocialButton = ({
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span className="flex max-w-fit flex-row items-center gap-2 rounded-full border px-4 py-1 text-primary hover:bg-primary hover:text-primary-foreground">
+      <span className="flex max-w-fit flex-row items-center gap-2 rounded-full border border-primary/50 px-4 py-1 text-primary hover:bg-primary hover:text-primary-foreground">
         {icon}
         <p>{label}</p>
       </span>
