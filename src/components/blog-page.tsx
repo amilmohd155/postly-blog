@@ -110,15 +110,18 @@ export const BlogPageComponent = ({ blog, tableOfContents }: BlogPageProps) => {
             <h3 className="max-w-fit rounded-lg bg-primary px-2 !text-foreground-invert">
               {blog.title}
             </h3>
-            <h6 className="rounded-lg bg-primary px-2 text-foreground-invert">
+            <h6 className="rounded-lg bg-primary px-2 text-primary-foreground">
               {blog.description}
             </h6>
-            <p className="font-mono text-sm text-muted-foreground">
+            <time
+              dateTime={formatDate(blog.date)}
+              className="py-3 font-mono text-sm text-muted-foreground"
+            >
               {formatDate(blog.date)}
-            </p>
+            </time>
           </section>
         </div>
-        <hr className="border-border/50" />
+        <hr className="!border-border/50" />
         <div ref={contentRef} className="pb-12 md:pb-0">
           <MDXComponent code={blog.body} />
         </div>

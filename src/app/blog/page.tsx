@@ -355,7 +355,7 @@ export default function BlogsPage({
             totalCount={tagsQuery || query ? blogs.length : totalPosts.length}
           />
         </header>
-        <section className="col-span-4 row-span-1 rounded-xl border border-border p-4">
+        <section className="col-span-4 row-span-1 overflow-y-auto rounded-xl border border-border p-4">
           <ul className="grid h-full grid-cols-4 grid-rows-2 gap-4">
             {blogs.slice(start, end).map((blog) => (
               <li key={blog.slug} className="col-span-2 row-auto">
@@ -372,7 +372,7 @@ export default function BlogsPage({
 const BlogListItem = ({ blog }: { blog: Post }) => {
   return (
     <Link href={`/${blog.slug}`} className="group">
-      <article className="flex flex-col space-y-1 rounded-lg pb-3 md:h-full group-hover:md:shadow-sm group-hover:md:shadow-gray-600/40">
+      <article className="flex flex-col space-y-1 rounded-lg pb-3 group-hover:md:shadow-sm group-hover:md:shadow-gray-600/40">
         <Image
           src={blog.cover}
           alt={`Cover image for ${blog.title}`}
@@ -403,20 +403,21 @@ const BlogListItem = ({ blog }: { blog: Post }) => {
               <MdArrowOutward className="inline-block h-6 w-6 shrink-0 translate-y-px transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-focus-visible:-translate-y-1 group-focus-visible:translate-x-1 motion-reduce:transition-none" />
             </div>
 
-            <p className="line-clamp-2 text-sm font-normal text-muted-foreground">
+            <p className="line-clamp-5 text-sm font-normal text-muted-foreground md:line-clamp-3">
               {blog.description}
             </p>
           </div>
 
           {blog.tags && (
-            <div className="mt-5 flex flex-row gap-2 text-xs md:mt-0 md:overflow-hidden">
-              {blog.tags.map((tag) => (
+            <div className="mt-3 flex flex-row gap-2 text-xs md:overflow-hidden">
+              {blog.tags.slice(0, 3).map((tag) => (
                 <Tag
                   key={tag}
                   tag={tag}
                   active={false}
                   effects={false}
                   showIcon={false}
+                  className="px-1.5 py-0.5 md:px-0.5 md:text-[11px] lg:px-2 lg:py-1"
                 />
               ))}
             </div>

@@ -20,9 +20,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  // openGraph: {
-  //   type: "article",
-  // },
   twitter: {
     card: "summary_large_image",
   },
@@ -42,7 +39,7 @@ export default function RootLayout({
         )}
       >
         <ThemeProviders>
-          <div className="mx-auto flex h-screen max-w-3xl flex-col lg:max-w-7xl">
+          <div className="mx-auto flex h-screen max-w-3xl flex-col lg:max-w-7xl xl:max-w-7xl">
             <Header />
             {children}
             {/* <Footer /> */}

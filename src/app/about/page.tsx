@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 // About page
 export default function AboutPage() {
   return (
-    <main className="mx-4 mb-5 grid max-w-none flex-1 gap-2 pb-5 md:grid-cols-2 md:overflow-hidden md:pb-0">
-      <article className="prose prose-sm relative rounded-xl border border-border p-5 dark:prose-invert lg:prose">
-        <p className="max-w-fit rounded-full border border-border/50 px-2 py-1">
+    <main className="mx-4 mb-5 grid max-w-none flex-1 gap-2 pb-5 lg:grid-cols-2 lg:overflow-hidden lg:pb-0">
+      <article className="prose prose-sm relative min-w-full rounded-xl border border-border p-5 dark:prose-invert lg:prose-base">
+        <p className="max-w-fit rounded-full border border-border/50 px-2">
           About Postly
         </p>
         <header>
@@ -26,7 +26,7 @@ export default function AboutPage() {
         </header>
         <section>
           <h1 className="postly">{siteConfig.name}</h1>
-          <h3 className="">Personal blogging website</h3>
+          <h3>Personal blogging website</h3>
           <p>
             Postly is a personal blogging website developed by Amil Muhammed
             Hamza using modern technologies like <strong>Next.js</strong>,{" "}
@@ -36,10 +36,7 @@ export default function AboutPage() {
             content management, Postly allows dynamic blogging with markdown and
             React components using MDX. The interface, styled with Tailwind CSS,
             is sleek, responsive, and customizable, while deployment on Vercel
-            provides fast, reliable, and globally distributed hosting. Postly is
-            a perfect platform for developers and writers to share their
-            thoughts and projects, offering a smooth and efficient blogging
-            experience.
+            provides fast, reliable, and globally distributed hosting.
           </p>
 
           <SocialButton
@@ -50,7 +47,7 @@ export default function AboutPage() {
           />
         </section>
       </article>
-      <article className="prose prose-sm relative rounded-xl border border-border p-5 dark:prose-invert lg:prose">
+      <article className="prose prose-sm relative min-w-full rounded-xl border border-border p-5 dark:prose-invert lg:prose-base">
         <p className="max-w-fit rounded-full border border-border/50 px-2 py-1">
           About Author
         </p>

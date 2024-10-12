@@ -20,12 +20,11 @@ type SocialShareProps = {
   url: string;
 } & React.ComponentProps<"div">;
 export const SocialShare = ({ url, className, ...props }: SocialShareProps) => {
+  const shareUrl = siteConfig.url + url;
+
   return (
     <div className={cn(className)} {...props}>
-      <FacebookShareButton
-        url={`${siteConfig.url}${url}`}
-        title="Share on Facebook"
-      >
+      <FacebookShareButton url={shareUrl} title="Share on Facebook">
         <FacebookIcon round size={32} />
       </FacebookShareButton>
       <TwitterShareButton
