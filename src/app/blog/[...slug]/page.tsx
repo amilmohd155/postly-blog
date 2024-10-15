@@ -1,24 +1,8 @@
 import "@/style/mdx.css";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { posts } from "#site/content";
-import { MDXComponent, MDXTableOfContents } from "@/components/mdx-component";
-import { cn, formatDate } from "@/lib/utils";
+import { MDXTableOfContents } from "@/components/mdx-component";
 import { Metadata } from "next";
-import Link from "next/link";
-import { GoTopButton, ToC } from "@/components/toc";
-import { BiLink, BiUpArrow, BiUpArrowCircle } from "react-icons/bi";
-import { FaLinkedin, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
-import { BsTwitterX } from "react-icons/bs";
-import { CopyToClipboard, SocialShare } from "@/components/social-share";
-import { siteConfig } from "@config/site";
-import {
-  HiCheck,
-  HiClipboard,
-  HiOutlineClipboard,
-  HiOutlineClipboardDocument,
-} from "react-icons/hi2";
-import { Content } from "@/components/content";
 import { BlogPageComponent } from "@/components/blog-page";
 
 type BlogPageProps = {
