@@ -1,0 +1,181 @@
+---
+title: How to extract table of contents from a mdx file
+author: Amil Muhammed Hamza
+description: "Simplifying TOC Extraction in Next.js MDX: Overcoming Documentation Challenges."
+cover: cover.jpg
+date: 2024-10-15
+published: true
+tags: ["MDX", "Next.js", "Table of Content"]
+---
+
+
+
+As part of my journey into full-stack development, I’ve been working on a personal blogging website using **Next.js, Velite** and **MDX**. The site, named Postly, is hosted on Vercel and serves as a space where I can write about my experiences and projects, all while continuing to enhance my technical skills.
+
+One of the challenges I recently encountered was extracting a Table of Contents (TOC) from an MDX file. This is a critical feature for improving the user experience on longer posts by providing easy navigation through different sections. After some research, I discovered there are a few third-party libraries available that claim to do the job. However, I quickly found out that the documentation for these libraries left a lot to be desired.
+
+In this post, I'll walk you through my method for extracting a TOC from an MDX file and the hurdles I faced along the way, hoping it might save you some time if you find yourself in a similar situation.
+
+## **Why MDX?**
+
+MDX is a fantastic format for blog posts because it allows you to use Markdown syntax while embedding React components. This lets me create dynamic and interactive content, which fits perfectly with my vision for Postly. I can seamlessly write regular Markdown for simple text formatting, while also including components for things like code snippets, diagrams, or even fully interactive elements.
+
+## The Challenge: Extracting a TOC
+
+In many blogs, especially for technical content, a Table of Contents is incredibly useful. It allows readers to quickly jump to sections of interest without having to scroll through an entire post. For this, I wanted to extract all the headings (like `<h1>`, `<h2>`, and `<h3>`) from my MDX files and create a interactive TOC in a different layout from the main MDX content.
+
+After some digging, I found a few libraries that could help with this:
+
+* [`rehype-toc`](https://www.npmjs.com/package/rehype-toc)
+* [`remark-toc`](https://www.npmjs.com/package/remark-toc)
+* [`stefanprobst/rehype-extract-toc`](https://www.npmjs.com/package/@stefanprobst/rehype-extract-toc)
+
+However, while these dependencies seemed promising at first, I quickly ran into the problem of incomplete or unclear documentation. I ended up spending more time than anticipated deciphering how to integrate them with my setup. The first two libraries helps in generating a TOC within the MDX content, it was not enough for my need to make a seperate TOC. The last library is the solution but it is fairly difficult to understand properly from the minimal documentation.
+
+## The Solution
+
+Despite the lack of clear guidance from the documentation, I was eventually able to get it working. I’m using Velite to show the example but any MDX compatible library can be used here with few tweeks. Here’s a simplified version of how I approached it:
+
+### Step 1: Install the Dependencies
+
+As mentioned above, [`stefanprobst/rehype-extract-toc`](https://www.npmjs.com/package/@stefanprobst/rehype-extract-toc)is the best library to use for this particular situation. To integrate it with Next.js and MDX, you first need to install the necessary packages:
+
+&#x20;npm install velite @stefanprobst/remark-extract-toc -D
+
+### Step 2: Configure MDX using Velite
+
+Here, I’ll be showing a stripped down version for the bootstrapping ofVelite, for further guide, refer [velite documentation](https://velite.js.org/guide/quick-start). Create a `velite.config.js` file in the root directory of your project to define collections config:
+
+
+
+```tsx
+import rehypeToc from "@stefanprobst/rehype-extract-toc";
+import rehypeTocExtract from "@stefanprobst/rehype-extract-toc/mdx";
+import { defineConfig, defineCollection, s } from "velite";
+
+const posts = defineCollection({
+  name: "Post",
+  pattern: "blog/**/*.mdx",
+  schema: s
+    .object({
+      slug: s.path(), // Front matter
+      title: s.string().max(90), // Front matter
+      ....
+      body: s.mdx(), // MDX content
+});
+
+export default defineConfig({
+  root: "content",
+  output: {
+    data: ".velite",
+    assets: "public/static",
+    base: "/static/",
+    name: "[name]-[hash:6].[ext]",
+    clean: true,
+  },
+  collections: { posts },
+  mdx: {
+    rehypePlugins: [
+      rehypeToc,
+      [rehypeTocExtract, { name: "toc" }], 
+      /** Optionally, provide a custom name for the export. */
+    ],
+  },
+});
+```
+
+
+
+Once the configuration file is created, add the MDX contents in the file structure and build contents as mentioned in the velite documentation (or similar process for the library you are using).
+
+### Step 3: Accessing the TOC
+
+Now the velite is configured and contents build, you can extract the Table of contents.
+
+
+
+```tsx
+import { Toc } from "@stefanprobst/rehype-extract-toc";
+import * as runtime from "react/jsx-runtime";
+
+const useMDXComponent = (code: string) => {
+  const fn = new Function(code);
+
+  return {
+    Component: fn({ ...runtime }).default,
+
+     /* 
+       here, "toc" depends on the "name" property given in the option for rehypeTocExtract
+       defaults to "tableOfContents"
+     */
+    TableOfContents: fn({ ...runtime }).toc as Toc, 
+    
+  };
+};
+
+export function MDXToC({ code }: { code: string }) {
+  const { TableOfContents } = useMDXComponent(code);
+
+  return TableOfContents;
+}
+```
+
+
+
+In the above snippet, I created a custom componen that takes in a string, ie, the MDX content. The library used by here, seperates the MDX into two functions namely, default and toc (if you have changed the name, if else “tableOfContents”). default contains the rest of the content and toc holds the generated table of content.
+
+We can get the table of content as shown below.
+
+
+
+```tsx
+import { posts } from "./.velite";
+
+/* 
+   We get a array type, Toc; 
+   if you have typed as shown in the beforementioned snippet
+*/
+const tableOfContents = MDXToC({ code: blog.body }); 
+```
+
+
+
+For type safety, we can use the provided type from the library, Toc and TocEntry. Toc is the array of TocEntry and TocEntry is the single base type if you need to do further modifications to the table of content array.
+
+### Step 4: Styling the TOC
+
+Once the TOC is accessed, styling is based on your preferrence. I styled the TOC using Tailwind CSS to ensure it matched the overall aesthetic of my blog. Below you can see a basic example of how to use the extracted data.
+
+
+
+```tsx
+<ul className="ml-5 flex list-outside list-none flex-col space-y-2">
+
+  {tableOfContents.map((toc) => (
+
+    <ToC key={toc.id} toc={toc} active={headerTags === toc.id} />
+
+  ))}
+
+</ul>
+```
+
+
+
+The TocEntry type provided with the library is far more complex and extensive than this basic example. Please do explore further and implement better solutions as per your requierements at your own pace.
+
+## The Documentation Gap
+
+One of the frustrating parts of this process was the lack of comprehensive examples and explanations in the documentation for these libraries. I spent hours combing through GitHub issues and blog posts to figure out what was missing from the official docs. It was a valuable learning experience, but it did slow down my progress.
+
+## Conclusion
+
+Building my personal blog using Next.js and MDX has been a rewarding process, despite the occasional hurdles. Extracting a Table of Contents from an MDX file is a powerful way to enhance the readability of your blog posts, and while the documentation for some third-party libraries could use improvement, it’s definitely possible to achieve with a bit of persistence.
+
+If you’re planning to implement a similar feature, my advice is to be patient with the setup and don’t hesitate to dig into GitHub issues or experiment with the code until you find the solution that works for you.
+
+You can check out my blogging website in the link given above, or if you wish to go straight to its repository. Here you go
+
+[https://github.com/amilmohd155/nextjs-blog](https://github.com/amilmohd155/nextjs-blog)
+
+**Happy coding!**
