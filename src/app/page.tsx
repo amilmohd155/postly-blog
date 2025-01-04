@@ -15,13 +15,13 @@ export default function Home() {
   const getColSpan = (index: number): string => {
     switch (index) {
       case 0:
-        return "lg:col-span-2 lg:row-span-2 md:col-span-2 md:row-span-2 bg-bento-a";
+        return "lg:col-span-2 lg:row-span-2 md:col-span-2 md:row-span-2 ";
       case 1:
-        return "lg:col-span-4 lg:row-span-1 md:col-span-2 md:row-span-1 bg-bento-b";
+        return "lg:col-span-4 lg:row-span-1 md:col-span-2 md:row-span-1 ";
       case 2:
-        return "lg:col-span-2 lg:row-span-1 md:col-span-1 md:row-span-1 bg-bento-c";
+        return "lg:col-span-2 lg:row-span-1 md:col-span-1 md:row-span-1";
       case 3:
-        return "lg:col-span-2 lg:row-span-1 md:col-span-1 md:row-span-1 bg-bento-d";
+        return "lg:col-span-2 lg:row-span-1 md:col-span-1 md:row-span-1 ";
       default:
         return "";
     }
@@ -48,12 +48,16 @@ export default function Home() {
       <MobileLatestBlogs posts={latestPosts} />
 
       {/* Desktop Top blogs */}
-      <main className="hidden flex-1 text-foreground dark:text-foreground-invert md:flex lg:overflow-hidden">
+      <main className="hidden flex-1 text-foreground md:flex lg:overflow-hidden">
         <section className="mb-5 grid w-full grid-cols-2 grid-rows-2 gap-2 px-4 lg:max-h-full lg:grid-cols-6 lg:grid-rows-2">
           {latestPosts.map((post, index) => (
             <article
               key={post.slug}
-              className={cn("grid grid-rows-1 rounded-lg", getColSpan(index))}
+              className={cn(
+                "grid grid-rows-1 rounded-lg",
+                getColSpan(index),
+                "border border-border",
+              )}
             >
               {getPostItem(post, index)}
               <PostFooter href={post.slug} />

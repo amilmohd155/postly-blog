@@ -105,14 +105,14 @@ const Drawable = ({ open, setOpen }: DrawableProps) => {
           </p>
           {` `}&copy; {siteConfig.year}
         </span>
-        <p>
+        <p className="text-sm">
           Created by <em>{siteConfig.author}</em>
         </p>
-        <span>
+        <span className="text-xs">
           Built with <strong>Next.js</strong>, <strong>TailwindCSS</strong>,{" "}
-          <strong>GSAP</strong>, and <strong>MDX</strong>
+          <strong>GSAP</strong>, <strong>R3F</strong> and <strong>MDX</strong>
         </span>
-        <span>
+        <span className="text-xs">
           Deployed on <strong>Vercel</strong>
         </span>
       </div>

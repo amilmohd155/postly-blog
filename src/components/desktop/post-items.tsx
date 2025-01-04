@@ -6,14 +6,14 @@ import { FaArrowRight } from "react-icons/fa6";
 
 const PostFooter = ({ href }: { href: string }) => {
   return (
-    <footer className="z-10 border-t border-black/50 text-sm">
+    <footer className="z-10 border-t border-border/50 text-sm">
       <Link
         href={`/${href}`}
         className="group flex w-full flex-row items-center justify-between px-4 py-3"
       >
         <span className="relative">
           <span>Read more</span>
-          <span className="absolute -bottom-1 left-0 h-px w-0 bg-black/30 transition-all group-hover:w-full" />
+          <span className="absolute -bottom-1 left-0 h-px w-0 bg-border/30 transition-all group-hover:w-full" />
         </span>
         <FaArrowRight className="-translate-x-2 transition-transform duration-75 ease-in-out group-hover:translate-x-0" />
       </Link>
@@ -80,7 +80,7 @@ const PostItem03 = ({ post }: { post: Post }) => {
         />
         <time
           dateTime="2024-01-09"
-          className="absolute bottom-3 left-3 z-10 rounded-full border border-primary bg-bento-c px-3"
+          className="absolute bottom-3 left-3 z-10 rounded-full bg-border/30 px-3 text-foreground-invert dark:text-foreground"
         >
           {formatDate(post.date)}
         </time>
@@ -96,26 +96,26 @@ const PostItem03 = ({ post }: { post: Post }) => {
 
 const PostItem04 = ({ post }: { post: Post }) => {
   return (
-    <div className="relative flex-1 overflow-hidden p-4 pb-0">
-      <div className="absolute right-4">
-        <div className="relative overflow-hidden rounded-full">
+    <div className="relative flex-1 space-y-2 overflow-hidden p-4 pb-0">
+      <div className="flex flex-row-reverse items-center justify-between">
+        <div className="overflow-hidden rounded-full">
           <Image
             src={post.cover}
             alt={post.title}
             className="z-0 h-20 w-20 scale-150 rounded-full object-cover transition-all duration-500 ease-in-out hover:scale-100"
           />
         </div>
+        <section>
+          <time
+            dateTime="2024-01-09"
+            className="rounded-full border border-black px-3"
+          >
+            {formatDate(post.date)}
+          </time>
+          <h2 className="w-[75%] text-lg font-semibold">{post.title}</h2>
+        </section>
       </div>
-      <div className="flex-1 space-y-2">
-        <time
-          dateTime="2024-01-09"
-          className="rounded-full border border-black px-3"
-        >
-          {formatDate(post.date)}
-        </time>
-        <h2 className="w-[75%] text-lg font-semibold">{post.title}</h2>
-        <p className="line-clamp-3">{post.description}</p>
-      </div>
+      <p className="line-clamp-3">{post.description}</p>
     </div>
   );
 };
