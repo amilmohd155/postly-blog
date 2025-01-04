@@ -31,7 +31,7 @@ export default function AboutPage() {
             Postly is a personal blogging website developed by Amil Muhammed
             Hamza using modern technologies like <strong>Next.js</strong>,{" "}
             <strong>Tailwind CSS</strong>, <strong>GSAP</strong>,{" "}
-            <strong>MDX</strong>, and{` `}
+            <strong>MDX</strong>, <strong>R3F</strong> and{` `}
             <strong>Velite</strong>. Designed for performance and seamless
             content management, Postly allows dynamic blogging with markdown and
             React components using MDX. The interface, styled with Tailwind CSS,

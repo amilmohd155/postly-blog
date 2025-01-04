@@ -42,7 +42,6 @@ export default function RootLayout({
           <div className="mx-auto flex h-screen max-w-3xl flex-col lg:max-w-7xl xl:max-w-7xl">
             <Header />
             {children}
-            {/* <Footer /> */}
           </div>
         </ThemeProviders>
       </body>

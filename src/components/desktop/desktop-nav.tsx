@@ -6,6 +6,7 @@ import { siteConfig } from "@config/site";
 import { HeaderNavLinks } from "@config/nav-links";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { IoCubeOutline } from "react-icons/io5";
 
 export default function DesktopNav() {
   const pathName = usePathname();
@@ -33,9 +34,30 @@ export default function DesktopNav() {
             </Link>
           </li>
         ))}
-        <li className="absolute right-2 rounded-full border border-border text-sm text-primary hover:border-primary hover:bg-primary hover:text-primary-foreground">
-          <ThemeSwitch className="p-2" />
-        </li>
+        <div className="absolute right-2 flex items-center gap-x-2">
+          <li className="hidden lg:flex">
+            <Link
+              href={"/visual"}
+              aria-label="Go to 3D Visualizer"
+              title="3D Visualizer"
+              className={cn(
+                pathName === "/visual"
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border text-primary",
+                "rounded-full border px-10 py-2 capitalize hover:border-primary hover:bg-primary hover:text-primary-foreground",
+                "flex items-center gap-x-1",
+              )}
+            >
+              {/* <span className="flex items-center gap-x-1"> */}
+              <IoCubeOutline className="h-5 w-5" />
+              {"3D Visualizer"}
+              {/* </span> */}
+            </Link>
+          </li>
+          <li className="rounded-full border border-border text-sm text-primary hover:border-primary hover:bg-primary hover:text-primary-foreground">
+            <ThemeSwitch className="p-2" />
+          </li>
+        </div>
       </ul>
     </div>
   );
