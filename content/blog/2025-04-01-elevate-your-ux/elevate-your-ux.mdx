@@ -1,0 +1,247 @@
+---
+title: "Elevate Your UX: Build a Smooth Custom Cursor with GSAP and React"
+author: Amil Muhammed Hamza
+description: Create a smooth, animated cursor that glides across the screen, bringing a touch of magic to every movement.
+cover: images/cover.png
+date: 2025-04-01
+published: true
+tags: ["react", "cursor", "gsap", "animation", "ux"]
+---
+
+
+When it comes to web development, adding unique interactions can significantly elevate the user experience. A custom cursor is a simple yet effective way to achieve that. In this article, we’ll explore how to create a custom cursor using GSAP (GreenSock Animation Platform) and React, focusing on smooth animations and responsiveness.
+
+# Why Use GSAP for Animations?
+
+GSAP is a robust JavaScript library tailored for high-performance animations. Its versatility and ease of use make it a go-to choice for creating smooth, interactive effects. With GSAP, you can achieve frame-perfect animations, even in performance-intensive environments.
+
+# Prerequisites
+
+To follow along, you’ll need:
+
+* Basic knowledge of React
+* Familiarity with JavaScript and GSAP
+
+# Setting Up the Project
+
+1. **Set Up Your React App**: If you haven’t already, create a new React app using Create React App or your preferred setup. I used vite with tailwindcss here.
+2. Install Dependencies:
+
+```txt
+npm install gsap @gsap/react
+```
+
+
+
+# Breaking Down the Code
+
+## 1. Refs for Cursor and Follower
+
+We use `useRef` to create references for the cursor and its follower. These references enable direct DOM manipulation.
+
+```tsx
+const cursorRef = useRef<HTMLSpanElement>(null);
+const followerRef = useRef<HTMLSpanElement>(null);
+```
+
+## 2. Using GSAP’s `quickTo`
+
+The `quickTo` method efficiently sets element properties, ensuring smooth and high-performance animations. We use it to update the `x` and `y` positions of the cursor and follower.
+
+```tsx
+/* Gsap allows the use of either element id, classname or ref */
+
+// using element id (ie, "#cursor", "#follower"
+const cursorXSetter = gsap.quickTo("#cursor", "x", {
+  duration: 0.2,
+  ease: "power3",
+});
+// using ref
+const cursorYSetter = gsap.quickTo(cursorRef.current, "y", {
+      duration: 0.2,
+      ease: "power3",
+});
+```
+
+## 3. Adding Event Listeners
+
+A `mousemove` event listener captures the user’s mouse position, which is then used to update the cursor and follower positions.
+
+```tsx
+window.addEventListener("mousemove", (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
+
+  cursorXSetter(x);
+  cursorYSetter(y);
+  followerXSetter(x);
+  followerYSetter(y);
+});
+```
+
+## 4. Rendering the Cursor and Follower
+
+The cursor and follower are styled spans positioned absolutely. The cursor is a small black dot, while the follower is a larger circle that trails the cursor.
+
+```tsx
+<>
+  <span id="cursor" ref={cursorRef} />
+  <span id="follower" ref={followerRef} />
+</>
+```
+
+# Styling
+
+Here, the styles are applied using CSS, but you can adapt them to any styling approach. The key points are:
+
+* **Fixed Positioning**: To make the cursor and follower independent of the page layout.
+* **Pointer Events None**: To ensure these elements don’t interfere with user interactions.
+
+```css
+html,
+body {
+  cursor: none; //required to disable the default cursor
+}
+
+#cursor,
+#follower {
+  position: fixed;
+  pointer-events: none; 
+  z-index: 50; // ensures the pointer is always on top
+
+  // Styling specific to this example
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+#cursor {
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: black;
+}
+
+#follower {
+  height: 2rem;
+  width: 2rem;
+  background-color: transparent;
+  border: 1.5px solid black;
+}
+```
+
+here is the TailwindCSS styling for the same
+
+```tsx
+// Cursor main component
+<span
+  className="pointer-events-none fixed z-50 h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black"
+/>
+//Cursor follower component
+<span
+  className="pointer-events-none fixed z-50 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-black bg-transparent"
+ />
+```
+
+# Rendering the Component
+
+Finally, the `CustomCursor` component is rendered alongside the main application:
+
+```tsx
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <CustomCursor />
+    <App />
+  </React.StrictMode>
+);
+```
+
+
+
+# The Mechanics Behind the Movement
+
+At the core of the custom cursor effect is GSAP’s ability to smoothly transition between values. Here’s how the cursor and follower move:
+
+**Cursor Movement**:
+
+* The cursor element is animated to directly follow the mouse position. This is achieved by calling the `gsap.quickTo` method for both the `x` and `y` properties, setting the duration to `0.2` seconds. This ensures the cursor reacts almost instantly to the mouse movement, creating a responsive and snappy feel.
+
+**Follower Movement**:
+
+* The follower element also tracks the mouse position, but with a delay. This is where the magic of the trailing effect comes in. The `gsap.quickTo` method for the follower has a longer `duration` of `0.6` seconds. This slower transition causes the follower to lag behind the cursor, giving the visual impression that it’s "following" the cursor's movement.
+* The difference in duration between the cursor and follower’s animations is crucial for the effect. By slowing down the follower’s movement, we create a sense of depth and fluidity, making the interaction feel more dynamic.
+
+## **UseGSAP**
+
+The `useGSAP` hook is used to integrate GSAP animations within React's component lifecycle in a seamless and efficient way. Here’s why it’s useful:
+
+1. **Syncs with React’s Lifecycle**: It ensures animations are properly triggered when the component mounts and cleaned up when it unmounts, avoiding issues with React’s rendering cycle.
+2. **Manages Refs and Animations**: It helps animate DOM elements (like the cursor and follower) using `useRef` while ensuring the animations don’t conflict with React's state and re-renders.
+3. **Declarative Control**: Encapsulates GSAP’s imperative API within React’s declarative structure, making animations easier to manage and less error-prone.
+4. **Efficient Animation**: By using `useGSAP`, animations are triggered only when necessary, improving performance and preventing unnecessary re-renders.
+
+# Full Code
+
+```tsx
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
+
+const CustomCursor = () => {
+  const cursorRef = useRef<HTMLSpanElement>(null);
+  const followerRef = useRef<HTMLSpanElement>(null);
+
+  useGSAP(() => {
+    const cursorXSetter = gsap.quickTo("#cursor", "x", {
+      duration: 0.2,
+      ease: "power3",
+    });
+    const cursorYSetter = gsap.quickTo(cursorRef.current, "y", {
+      duration: 0.2,
+      ease: "power3",
+    });
+
+    const followerXSetter = gsap.quickTo(followerRef.current, "x", {
+      duration: 0.6,
+      ease: "power3",
+    });
+    const followerYSetter = gsap.quickTo("#follower", "y", {
+      duration: 0.6,
+      ease: "power3",
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+
+      cursorXSetter(x);
+      cursorYSetter(y);
+      followerXSetter(x);
+      followerYSetter(y);
+    });
+  }, []);
+
+  return (
+    <>
+      <span id="cursor" ref={cursorRef} />
+      <span id="follower" ref={followerRef} />
+    </>
+  );
+};
+
+export default CustomCursor;
+```
+
+# Live Demo
+
+For a live demonstration and editable code, check out this&#x20;
+
+[https://codesandbox.io/p/sandbox/custom-cursor-m283xv](https://codesandbox.io/p/sandbox/custom-cursor-m283xv)
+
+# Customizing the Effect
+
+This custom cursor effect is highly customizable. Here are some ideas for further enhancement:
+
+1. **Change Cursor Shapes**: You could replace the circular cursor with a custom image or another shape.
+2. **Multiple Followers**: Add multiple follower elements with different delays to create a more complex and layered effect.
+3. **Cursor Interaction**: You could add interaction with other elements on the page, where the cursor or follower changes shape or color when hovering over certain areas
+
+Happy coding….
