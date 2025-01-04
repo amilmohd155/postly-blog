@@ -48,7 +48,7 @@ const Scene = ({ ...props }) => {
   const from = -0.25; // could be 0
   const radius = 5.25;
 
-  const latestPosts = sortPosts([...posts].slice(0, 5));
+  const latestPosts = sortPosts([...posts]).slice(0, 5);
   const length = latestPosts.length;
 
   const [hovered, setHover] = useState<number | null>(null);
@@ -189,7 +189,7 @@ const ActiveCard = ({
 
   const color = theme === "light" ? "hsl(220, 15%, 15%)" : "hsl(255, 99%, 99%)";
 
-  const latestPosts = sortPosts([...posts].slice(0, 5));
+  const latestPosts = sortPosts([...posts]).slice(0, 5);
   const activePost = latestPosts[active];
 
   useLayoutEffect(

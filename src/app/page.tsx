@@ -7,10 +7,10 @@ import {
   PostItem04,
 } from "@/components/desktop/post-items";
 import MobileLatestBlogs from "@/components/mobile/latest-blogs";
-import { cn, sortPosts } from "@/lib/utils";
+import { cn, formatDate, sortPosts } from "@/lib/utils";
 
 export default function Home() {
-  const latestPosts = sortPosts([...posts].slice(0, 4));
+  const latestPosts = sortPosts([...posts]).slice(0, 4);
 
   const getColSpan = (index: number): string => {
     switch (index) {
