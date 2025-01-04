@@ -9,6 +9,7 @@ export default function Visualizer() {
   return (
     <div
       ref={containerRef}
+      id="container-visualizer"
       className="relative flex h-screen w-full cursor-none flex-col"
     >
       <CustomCursor container={containerRef} />

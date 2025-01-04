@@ -14,6 +14,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
+      url: `${siteConfig.url}/visual`,
+    },
+    {
       url: `${siteConfig.url}/about`,
     },
     {

@@ -1,9 +1,8 @@
 "use client";
 
-import { useHover } from "@/providers/hover";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useRef } from "react";
 
 const CustomCursor = ({
   container,
@@ -53,23 +52,27 @@ const CustomCursor = ({
       followerYSetter(e.offsetY);
     });
 
-    container.current?.addEventListener("mouseleave", () => {
-      cursorOpacitySetter(0);
-      gsap.to(cursorRef.current, {
-        scale: 0,
+    document
+      .getElementById("container-visualizer")
+      ?.addEventListener("mouseleave", () => {
+        cursorOpacitySetter(0);
+        gsap.to(cursorRef.current, {
+          scale: 0,
+        });
+        followerOpacitySetter(0);
+        gsap.to(followerRef.current, { scale: 0 });
       });
-      followerOpacitySetter(0);
-      gsap.to(followerRef.current, { scale: 0 });
-    });
 
-    container.current?.addEventListener("mouseover", () => {
-      cursorOpacitySetter(1);
-      gsap.to(cursorRef.current, {
-        scale: 1,
+    document
+      .getElementById("container-visualizer")
+      ?.addEventListener("mouseenter", () => {
+        cursorOpacitySetter(1);
+        gsap.to(cursorRef.current, {
+          scale: 1,
+        });
+        followerOpacitySetter(1);
+        gsap.to(followerRef.current, { scale: 1 });
       });
-      followerOpacitySetter(1);
-      gsap.to(followerRef.current, { scale: 1 });
-    });
 
     // if (isAnyHovered) {
     //   gsap.to(followerRef.current, {
@@ -93,11 +96,11 @@ const CustomCursor = ({
       <span
         id="cursor"
         ref={cursorRef}
-        className="pointer-events-none fixed z-50 h-1 w-1 -translate-x-1/2 -translate-y-1/2 scale-0 rounded-full bg-black opacity-0 dark:bg-white"
+        className="pointer-events-none fixed z-50 h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black dark:bg-white"
       />
       <span
         ref={followerRef}
-        className="pointer-events-none fixed z-50 h-8 w-8 -translate-x-1/2 -translate-y-1/2 scale-0 rounded-full border border-black bg-transparent opacity-0 dark:border-white"
+        className="pointer-events-none fixed z-50 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-black bg-transparent dark:border-white"
       />
     </div>
   );
