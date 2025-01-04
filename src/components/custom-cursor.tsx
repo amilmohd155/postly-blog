@@ -62,7 +62,7 @@ const CustomCursor = ({
       gsap.to(followerRef.current, { scale: 0 });
     });
 
-    container.current?.addEventListener("mouseenter", () => {
+    container.current?.addEventListener("mouseover", () => {
       cursorOpacitySetter(1);
       gsap.to(cursorRef.current, {
         scale: 1,

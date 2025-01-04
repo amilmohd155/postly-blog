@@ -192,7 +192,13 @@ const ActiveCard = ({
   const latestPosts = sortPosts([...posts].slice(0, 5));
   const activePost = latestPosts[active];
 
-  useLayoutEffect(() => void (ref.current.material.zoom = 1.75), [active]);
+  useLayoutEffect(
+    () =>
+      void ((
+        ref.current.material as JSX.IntrinsicElements["imageMaterial"]
+      ).zoom = 1.75),
+    [active],
+  );
   useFrame((state, delta) => {
     easing.damp(ref.current.material, "zoom", 1, 0.25, delta);
   });

@@ -92,7 +92,7 @@ const Frame = ({
       delta,
     );
     easing.dampC(
-      imageRef.current.material.color,
+      (imageRef.current.material as any).color,
       hovered[index] ? "#ffffff" : "#9a9a9a",
       hovered[index] ? 0.3 : 0.15,
       delta,
@@ -156,7 +156,11 @@ const CameraRig = ({
   const { controls } = useThree();
 
   useEffect(() => {
-    controls?.setLookAt(...position.toArray(), ...focus.toArray(), true);
+    (controls as any)?.setLookAt(
+      ...position.toArray(),
+      ...focus.toArray(),
+      true,
+    );
   });
 
   return (
